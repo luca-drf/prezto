@@ -112,14 +112,14 @@ function prompt_paradox_setup {
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
-  zstyle ':prezto:module:git:info:action' format ' ⁝ %s'
+  zstyle ':prezto:module:git:info:action' format '⁝ %s'
   zstyle ':prezto:module:git:info:added' format '%B%F{green}*%f%b'
   zstyle ':prezto:module:git:info:ahead' format '%B%F{cyan}▴%f%b'
   zstyle ':prezto:module:git:info:behind' format '%B%F{magenta}▾%f%b'
-  zstyle ':prezto:module:git:info:branch' format '%b'
+  zstyle ':prezto:module:git:info:branch' format '%b '
   zstyle ':prezto:module:git:info:commit' format '‣ %.7c'
   zstyle ':prezto:module:git:info:deleted' format '✖'
-  zstyle ':prezto:module:git:info:dirty' format ' ⁝'
+  zstyle ':prezto:module:git:info:dirty' format '⁝'
   zstyle ':prezto:module:git:info:modified' format '*'
   zstyle ':prezto:module:git:info:position' format '%p'
   zstyle ':prezto:module:git:info:renamed' format '➙'
