@@ -18,4 +18,4 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export KUBE_PS1_SEPARATOR=""
 export KUBE_PS1_SYMBOL_DEFAULT=""
 . "$HOME/.cargo/env"
-export PATH="/Users/lucadrf/.local/bin:/Users/lucadrf/fltk/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/fltk/bin:$PATH"
