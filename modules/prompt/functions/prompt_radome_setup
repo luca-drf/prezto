@@ -23,12 +23,15 @@ _prompt_paradox_current_bg='NONE'
 _prompt_paradox_segment_separator=''
 
 
-function prompt_paradox_arch {
-  if [ $(arch) = "i386" ]; then
-    print -n "x86"
-  else
-    print -n "arm"
-  fi
+function tf_prompt_info() {
+  # dont show 'default' workspace in home dir
+  [[ "$PWD" != ~ ]] || return
+  # check if in terraform dir and file exists
+  [[ -d "${TF_DATA_DIR:-.terraform}" && -r "${TF_DATA_DIR:-.terraform}/environment" ]] || return
+
+  local workspace="$(< "${TF_DATA_DIR:-.terraform}/environment")"
+  local tf_prompt="${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
+  print -n "( ${tf_prompt})"
 }
 
 
@@ -56,12 +59,11 @@ function prompt_paradox_end_segment {
 }
 
 function prompt_paradox_build_prompt {
-  prompt_paradox_start_segment 10 8 '$(prompt_paradox_arch)%f'
+  if [[ -n "$git_info" ]]; then
+    prompt_paradox_start_segment 11 black '${(e)git_info[ref]}${(e)git_info[status]}'
+  fi
   prompt_paradox_start_segment black yellow '$_prompt_paradox_pwd'
 
-  if [[ -n "$git_info" ]]; then
-    prompt_paradox_start_segment black default '\[${(e)git_info[ref]}${(e)git_info[status]}\]'
-  fi
   print -n '%E%{%f%k%}'
 }
 
@@ -113,20 +115,20 @@ function prompt_paradox_setup {
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
-  zstyle ':prezto:module:git:info:action' format ':%s'
-  zstyle ':prezto:module:git:info:added' format '%B%F{green}*%f%b'
-  zstyle ':prezto:module:git:info:ahead' format '%B%F{cyan}▴%f%b'
-  zstyle ':prezto:module:git:info:behind' format '%B%F{magenta}▾%f%b'
-  zstyle ':prezto:module:git:info:branch' format '%b'
-  zstyle ':prezto:module:git:info:commit' format '‣ %.7c'
-  zstyle ':prezto:module:git:info:deleted' format '✖'
-  zstyle ':prezto:module:git:info:dirty' format ':'
-  zstyle ':prezto:module:git:info:modified' format '%B%F{red}*%f%b'
+  zstyle ':prezto:module:git:info:action' format ' :%s'
+  zstyle ':prezto:module:git:info:added' format ' %B%F{22}*%f%b'
+  zstyle ':prezto:module:git:info:ahead' format ' %B%F{250}▲%f%b'
+  zstyle ':prezto:module:git:info:behind' format ' %B%F{250}▼%f%b'
+  zstyle ':prezto:module:git:info:branch' format ' %b'
+  zstyle ':prezto:module:git:info:commit' format ' ‣ %.7c'
+  zstyle ':prezto:module:git:info:deleted' format ' %B%F{88}†%f%b'
+  zstyle ':prezto:module:git:info:dirty' format ' ±'
+  zstyle ':prezto:module:git:info:modified' format ' %B%F{88}*%f%b'
   zstyle ':prezto:module:git:info:position' format '%p'
-  zstyle ':prezto:module:git:info:renamed' format '➙'
-  zstyle ':prezto:module:git:info:stashed' format 'S'
-  zstyle ':prezto:module:git:info:unmerged' format '%B%F{yellow}*%f%b'
-  zstyle ':prezto:module:git:info:untracked' format '%B%F{red}?%f%b'
+  zstyle ':prezto:module:git:info:renamed' format ' ○'
+  zstyle ':prezto:module:git:info:stashed' format ' %B%F{250}∴%f%b'
+  zstyle ':prezto:module:git:info:unmerged' format ' %B%F{250}*%f%b'
+  zstyle ':prezto:module:git:info:untracked' format ' %B%F{88}?%f%b'
   zstyle ':prezto:module:git:info:keys' format \
     'ref' '$(coalesce "%b" "%p" "%c")' \
     'status' '%s%D%A%B%S%a%d%m%r%U%u'
@@ -138,7 +140,7 @@ function prompt_paradox_setup {
   PROMPT='
 ${(e)$(prompt_paradox_build_prompt)}
 %(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)${editor_info[keymap]} '
- RPROMPT='${(e)$(prompt_paradox_virtualenv)} [%D{%H:%M:%S}]'
+RPROMPT='${(e)$(tf_prompt_info)} ${(e)$(prompt_paradox_virtualenv)} [%D{%H:%M:%S}]'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
