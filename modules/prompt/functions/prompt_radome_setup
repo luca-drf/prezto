@@ -59,7 +59,7 @@ function prompt_paradox_end_segment {
 }
 
 function prompt_paradox_build_prompt {
-  prompt_paradox_start_segment 10 black '%(?:%F{white}○:%F{88}×)%(!:%F{white}#:)%(1j:%F{white}⚙:)'
+  prompt_paradox_start_segment 10 black '%(?:%F{white}%?:%F{88}%?)%(!:%F{white}#:)%(1j:%F{white}⚙:)'
   if [[ -n "$git_info" ]]; then
     prompt_paradox_start_segment 11 black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
