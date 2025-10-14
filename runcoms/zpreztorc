@@ -36,8 +36,6 @@ zstyle ':prezto:load' pmodule \
   'terminal' \
   'editor' \
   'spectrum' \
-  'utility' \
-  'completion' \
   'prompt' \
   'git' \
   'ssh' \
@@ -45,8 +43,8 @@ zstyle ':prezto:load' pmodule \
   'gpg' \
   'docker' \
   'python' \
-  'history-substring-search'
-
+  'history-substring-search' \
+  'completion'
 
 #
 # Autosuggestions
