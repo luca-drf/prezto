@@ -42,6 +42,7 @@ zstyle ':prezto:load' pmodule \
   'gpg' \
   'docker' \
   'python' \
+  'node' \
   'history-substring-search' \
   'completion'
 
@@ -164,11 +165,19 @@ zstyle ':prezto:module:prompt' pwd-length 'long'
 # Python
 #
 
+zstyle ':prezto:module:python:alias' skip 'yes'
+
 # Auto switch the Python virtualenv on directory change.
 # zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 
 # Automatically initialize virtualenvwrapper if pre-requisites are met.
 # zstyle ':prezto:module:python:virtualenv' initialize 'yes'
+
+#
+# Node
+#
+
+zstyle ':prezto:module:node:alias' skip 'yes'
 
 #
 # Ruby
