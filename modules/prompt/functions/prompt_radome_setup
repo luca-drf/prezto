@@ -30,7 +30,7 @@ function tf_prompt_info() {
   [[ -d "${TF_DATA_DIR:-.terraform}" && -r "${TF_DATA_DIR:-.terraform}/environment" ]] || return
 
   local workspace="$(< "${TF_DATA_DIR:-.terraform}/environment")"
-  local tf_prompt="${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
+  local tf_prompt="${workspace:gs/%/%%}"
   print -n "( ${tf_prompt})"
 }
 
