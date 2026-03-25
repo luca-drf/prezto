@@ -65,7 +65,7 @@ function prompt_paradox_build_prompt {
   fi
   prompt_paradox_start_segment black yellow '$_prompt_paradox_pwd'
 
-  print -n '%E%{%f%k%}'
+  print -n '%E%f%k'
 }
 
 function prompt_paradox_virtualenv {
