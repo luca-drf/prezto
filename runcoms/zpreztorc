@@ -40,6 +40,7 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'osx' \
   'gpg' \
+  'ssh' \
   'docker' \
   'python' \
   'node' \
@@ -201,7 +202,7 @@ zstyle ':prezto:module:node:alias' skip 'yes'
 #
 
 # Set the SSH identities to load into the agent.
-# zstyle ':prezto:module:ssh:load' identities 'id_rsa'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_ed25519'
 
 #
 # Syntax Highlighting
