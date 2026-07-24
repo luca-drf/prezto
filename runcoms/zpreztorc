@@ -45,6 +45,7 @@ zstyle ':prezto:load' pmodule \
   'python' \
   'node' \
   'history-substring-search' \
+  'fzf-tab' \
   'completion'
 
 #
